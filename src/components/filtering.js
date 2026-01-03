@@ -20,15 +20,18 @@ export function initFiltering(elements, indexes) {
     return (data, state, action) => {
 
         // @todo: #4.2 — обработать очистку поля
-        if (action.name === "clear") {
-            const parent = action.closest('div');
-            const input = parent.querySelector('input'); // исправлено
-            if (input) {
-                input.value = '';                            // очистка DOM
-                state[action.dataset.field] = '';            // очистка состояния
+        if (action && action.type === 'click' && action.target.name === 'clear') {
+            const button = action.target;
+            const fieldName = button.dataset.field;
+            const filterWrapper = button.closest('.filter-wrapper');
+            if (filterWrapper) {
+                const input = filterWrapper.querySelector('input');
+                if (input) {
+                    input.value = '';       
+                    state[fieldName] = '';  
+                }
             }
         }
-
         // @todo: #4.5 — отфильтровать данные используя компаратор
         return data.filter(row => compare(row, state));
     }

@@ -32,6 +32,6 @@ export const initPagination = ({pages, fromRow, toRow, totalRows}, createPage) =
         // @todo: #2.2 — посчитать сколько строк нужно пропустить и получить срез данных
         const skip = (page - 1) * rowsPerPage;            // сколько строк нужно пропустить
         return data.slice(skip, skip + rowsPerPage);    // получаем нужную часть строк (заменяем имеющийся return)
-        return data.slice(0, 10);
+        
     }
 }
